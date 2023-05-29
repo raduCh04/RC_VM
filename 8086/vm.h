@@ -20,21 +20,19 @@ typedef enum registers
 	REG_FLAGS,
 
 	REG_COUNT
-} registers;
+} registers_t;
 
-typedef struct vm
-{
-	uint8 (*mem_read)(uint16 address);
-	void (*mem_write)(uint16 address, uint8 value);
-	uint16 (*reg_read)(registers reg);
-	void (*reg_write)(registers reg, uint16 value);
-	void (*load_program_data)(usize size, uint8 *data);
-	void (*load_program_from_file)(usize *size, const char *path);
-	void (*execute_program)(usize program_size);
-	void (*print_regs)(void);
-	void (*print_memory)(void);
-	void (*print_memory_from_to)(usize lower, usize upper);	
-} vm_t;
+typedef struct virtual_machine vm_t;
 
-void vm_init_ptr(vm_t *vm);
-vm_t vm_init(void);
+vm_t *vm_init(void);
+uint8 mem_read(vm_t *vm, uint16 address);
+void mem_write(vm_t *vm ,uint16 address, uint8);
+uint16 reg_read(vm_t *vm, registers_t reg);
+void reg_write(vm_t *vm, registers_t reg, uint16 value);
+void load_program_data(vm_t *vm, usize size, uint8 *data);
+void load_program_from_file(vm_t *vm, usize *size, const char *path);
+void execute_program(vm_t *vm, usize program_size);
+void print_regs(vm_t *vm);
+void print_memory(vm_t *vm);
+void print_memory_from_to(vm_t *vm, usize lower, usize upper);
+
