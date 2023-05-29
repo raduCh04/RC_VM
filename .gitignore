@@ -1,5 +1,6 @@
-build.sh
-main
-vm
-test
+bin
+bin-int
+premake5
+Makefile
 .vscode
+build_run.sh
