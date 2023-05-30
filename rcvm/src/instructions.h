@@ -4,13 +4,23 @@
 
 typedef enum rcvm_instruction_opcode
 {
+	//Movs
 	MOV_REG_MEM = 0b100010,
 	MOV_IMM_REG_MEM = 0b1100011,
 	MOV_IMM_REG = 0b1011,
 	MOV_MEM_ACC = 0b1010000,
 	MOV_ACC_MEM = 0b1010001,
 
+	//Arithmetic
+	ADD_REG_MEM = 0b000000,
+	ADD_IMM_ACC = 0b0000010,
 
+	SUB_REG_MEM = 0b001010,
+	SUB_IMM_ACC = 0b0010110,
+
+	CMP_REG_MEM = 0b001110,
+	CMP_IMM_ACC = 0b0011110,
+	ARM_IMM_REG_MEM = 0b100000,
 } rcvm_instr_opc_t;
 
 // Movs (e.g. mov ax, bx)

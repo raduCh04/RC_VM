@@ -78,6 +78,34 @@ void rcvm_execute_program(rcvm_t *vm, usize program_size)
 		{
 			mov_imm_reg(vm, byte);
 		}
+		else if ((instr >> 2) == ADD_REG_MEM)
+		{
+			add_reg_mem(vm, byte);
+		}
+		else if ((instr >> 1) == ADD_IMM_ACC)
+		{
+			add_imm_acc(vm, byte);
+		}
+		else if ((instr >> 2) == SUB_REG_MEM)
+		{
+			sub_reg_mem(vm, byte);
+		}
+		else if ((instr >> 1) == SUB_IMM_ACC)
+		{
+			sub_imm_acc(vm, byte);
+		}
+		else if ((instr >> 2) == CMP_REG_MEM)
+		{
+			cmp_reg_mem(vm, byte);
+		}
+		else if ((instr >> 1) == CMP_IMM_ACC)
+		{
+			cmp_imm_acc(vm, byte);
+		}
+		else if ((instr >> 2) == ARM_IMM_REG_MEM)
+		{
+			arm_imm_reg_mem(vm, byte);
+		}
 		else
 		{
 			//TODO: Handle error (invalid instructions)
