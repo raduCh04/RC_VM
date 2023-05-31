@@ -9,7 +9,7 @@
 struct radu_chira_virtual_machine
 {
 	uint8 memory[MEMORY_MAX];
-	int16 registers[REG_COUNT];	
+	uint16 registers[REG_COUNT];	
 };
 
 inline uint8 rcvm_mem_read(rcvm_t *vm, uint16 address)
@@ -80,11 +80,11 @@ void rcvm_execute_program(rcvm_t *vm, usize program_size)
 		}
 		else if ((instr >> 2) == ADD_REG_MEM)
 		{
-			add_reg_mem(vm, byte);
+			//add_reg_mem(vm, byte);
 		}
 		else if ((instr >> 1) == ADD_IMM_ACC)
 		{
-			add_imm_acc(vm, byte);
+			//add_imm_acc(vm, byte);
 		}
 		else if ((instr >> 2) == SUB_REG_MEM)
 		{

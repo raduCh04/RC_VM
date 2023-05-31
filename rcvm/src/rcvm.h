@@ -22,6 +22,12 @@ typedef enum radu_chira_virtual_machine_registers
 	REG_COUNT
 } rcvm_registers_t;
 
+typedef enum radu_chira_virtual_machine_register_flags
+{
+	FLAGS_ZERO = 0x40,
+	FLAGS_SIGNED = 0x80,
+} rcvm_registers_flags_t;
+
 typedef struct radu_chira_virtual_machine rcvm_t;
 
 
