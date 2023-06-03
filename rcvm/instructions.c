@@ -75,7 +75,7 @@ static inline void set_flag(rcvm_t *vm, int16 value)
 	}
 	if (is_signed)
 	{
-		flags |= FLAGS_ZERO;
+		flags |= FLAGS_SIGNED;
 	}
 	else if (!is_signed && (flags & FLAGS_SIGNED))
 	{
@@ -1148,3 +1148,14 @@ void arm_imm_reg_mem(rcvm_t *vm, uint8 *instr_byte) //TODO(radu): Add simulation
 	}
 }
 #pragma endregion //arithmetics
+
+void jump_not_zero(rcvm_t *vm, uint8 *instr_byte)
+{
+	int8 jump_num = *(instr_byte + 1);
+	printf("jnz $%d\n", jump_num);
+	rcvm_reg_write(vm, REG_IP, rcvm_reg_read(vm, REG_IP) + 2);
+	if (!(rcvm_reg_read(vm, REG_FLAGS) & FLAGS_ZERO))
+	{
+		rcvm_reg_write(vm, REG_IP, rcvm_reg_read(vm, REG_IP) + jump_num);
+	}
+}

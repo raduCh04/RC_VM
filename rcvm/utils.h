@@ -28,21 +28,6 @@ typedef double f64;
 typedef unsigned long long usize;
 typedef signed long long ssize;
 
-
-#if defined(WIN32) || defined(_WIN32)
-	#ifdef DLL_EXPORT
-		#define RCVM_API __declspec(dllexport)
-	#else
-		#define RCVM_API __declspec(dllimport)
-	#endif
-#else
-	#ifdef DLL_EXPORT 
-		#define RCVM_API __attribute__((visibility("default")))
-	#else
-		#define RCVM_API
-	#endif
-#endif
-
 void secure_memcpy(void *dest, void *src, usize size);
 void secure_memset(void *ptr, ssize value, usize size);
 void secure_strcpy(char *dest, const char *str, usize dest_size);

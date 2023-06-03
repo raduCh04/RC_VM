@@ -4,3 +4,7 @@ premake5
 Makefile
 .vscode
 build_run.sh
+rcvm/test
+.gitignore
+rcvm/test.data
+rcvm/rcvm

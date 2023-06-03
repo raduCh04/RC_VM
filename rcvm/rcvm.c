@@ -18,10 +18,16 @@ inline uint8 rcvm_mem_read(rcvm_t *vm, uint16 address)
 	return (vm->memory[address + MEMORY_OFFSET]);
 }
 
-inline void rcvm_mem_write(rcvm_t *vm, uint16 address, uint8 value)
+inline void rcvm_mem_write(rcvm_t *vm, uint16 address, uint16 value)
 {
 	//TODO: Handle error
-	vm->memory[address + MEMORY_OFFSET] = value;	
+	uint8 low_byte = value;
+	uint8 high_byte = value >> 8;
+	vm->memory[address + MEMORY_OFFSET] = low_byte;
+	if (high_byte != 0)
+	{
+		vm->memory[address + MEMORY_OFFSET + 1] = high_byte;
+	}
 }
 
 inline uint16 rcvm_reg_read(rcvm_t *vm, rcvm_registers_t reg)
@@ -80,11 +86,11 @@ void rcvm_execute_program(rcvm_t *vm, usize program_size)
 		}
 		else if ((instr >> 2) == ADD_REG_MEM)
 		{
-			//add_reg_mem(vm, byte);
+			add_reg_mem(vm, byte);
 		}
 		else if ((instr >> 1) == ADD_IMM_ACC)
 		{
-			//add_imm_acc(vm, byte);
+			add_imm_acc(vm, byte);
 		}
 		else if ((instr >> 2) == SUB_REG_MEM)
 		{
@@ -105,6 +111,10 @@ void rcvm_execute_program(rcvm_t *vm, usize program_size)
 		else if ((instr >> 2) == ARM_IMM_REG_MEM)
 		{
 			arm_imm_reg_mem(vm, byte);
+		}
+		else if (instr == JMP_NOT_ZERO)
+		{
+			jump_not_zero(vm, byte);
 		}
 		else
 		{
@@ -168,6 +178,11 @@ void rcvm_print_memory_from_to(rcvm_t *vm, usize lower, usize upper)
 		count++;
 	}
 	printf("\n");
+}
+
+void rcvm_write_memory_to_file(rcvm_t *vm, const char *path)
+{
+	file_write_binary(path, vm->memory, MEMORY_MAX);
 }
 
 rcvm_t *rcvm_init(void)

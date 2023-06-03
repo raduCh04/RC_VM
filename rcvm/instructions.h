@@ -21,6 +21,9 @@ typedef enum rcvm_instruction_opcode
 	CMP_REG_MEM = 0b001110,
 	CMP_IMM_ACC = 0b0011110,
 	ARM_IMM_REG_MEM = 0b100000,
+
+	JMP_NOT_ZERO = 0b01110101,
+
 } rcvm_instr_opc_t;
 
 // Movs (e.g. mov ax, bx)
@@ -44,4 +47,6 @@ void cmp_imm_acc(rcvm_t *vm, uint8 *instr_byte);
 
 // All arithmetic immediate operations
 void arm_imm_reg_mem(rcvm_t *vm, uint8 *instr_byte);
+
+void jump_not_zero(rcvm_t *vm, uint8 *instr_byte);
 
